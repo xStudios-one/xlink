@@ -1,0 +1,129 @@
+#!/usr/bin/env node
+
+/*
+            ______     __                      __  __                     
+           /      \   |  \                    |  \|  \                    
+ __    __ |  $$$$$$\ _| $$_    __    __   ____| $$ \$$  ______    _______ 
+|  \  /  \| $$___\$$|   $$ \  |  \  |  \ /      $$|  \ /      \  /       \
+ \$$\/  $$ \$$    \  \$$$$$$  | $$  | $$|  $$$$$$$| $$|  $$$$$$\|  $$$$$$$
+  >$$  $$  _\$$$$$$\  | $$ __ | $$  | $$| $$  | $$| $$| $$  | $$ \$$    \ 
+ /  $$$$\ |  \__| $$  | $$|  \| $$__/ $$| $$__| $$| $$| $$__/ $$ _\$$$$$$\
+|  $$ \$$\ \$$    $$   \$$  $$ \$$    $$ \$$    $$| $$ \$$    $$|       $$
+ \$$   \$$  \$$$$$$     \$$$$   \$$$$$$   \$$$$$$$ \$$  \$$$$$$  \$$$$$$$ 
+ xLink © 2021 by xstudios.one is licensed under CC BY-ND 4.0 
+*/
+// IMPORTANT
+// If you're using linux run 'chmod +x bin/xlink'
+const dependencies = [
+  'axios',
+  'chalk',
+  'child_process',
+  'fs',
+  'fs-extra',
+  'path',
+  'progress',
+  'prompts',
+  'signale',
+  'yargs',
+];
+function getMissingDependencies() {
+  let missing = [];
+  for (let d of dependencies) {
+    try {
+      require.resolve(d);
+    } catch (e) {
+      missing.push(d);
+    }
+  }
+  return missing;
+}
+
+async function askAndInstallDependencies() {
+  const FgYellow = '\x1b[33m';
+  const FgRed = '\x1b[31m';
+  const reset = '\x1b[0m';
+  console.log(`${FgYellow} Do you want to install following dependencies?:`);
+  console.log(FgRed + missing.join(', '));
+
+  // install dependencies
+  const { spawn } = require('child_process');
+  const path = require('path');
+
+  const install = spawn(
+    'npm',
+    ['install', '--prefix', path.join(__dirname, '..')],
+    { stdio: 'inherit' }
+  );
+  install.on('');
+}
+
+const missing = getMissingDependencies();
+
+if (missing.length > 0) {
+  // colorcode import
+  const reset = '\x1b[0m';
+  const bright = '\x1b[1m';
+  const FgRed = '\x1b[31m';
+  const FgGreen = '\x1b[32m';
+  const FgYellow = '\x1b[33m';
+  const FgBlue = '\x1b[34m';
+  const FgCyan = '\x1b[36m';
+  // colorcode import end
+  require('../modules/logodisplay');
+  console.log(FgYellow);
+  console.log(
+    '                           SMART INSTALLR V.1                      '
+  );
+  // END LICENSE | START INSTRUCTION
+  console.log();
+  console.log(FgGreen);
+  console.log('                                         Hey there!');
+  console.log(
+    "               I see this you don't have all of the needed libraries installed"
+  );
+  console.log(
+    "                      Use 'xlink -i' to install them automatically"
+  );
+  console.log(
+    `              here's a few things you will have to do before running your app:` +
+      FgRed +
+      bright
+  );
+  console.log(
+    "Install app using 'npm install git+https://github.com/xStudios-one/xlink -g' or use 'npm install' in app's directory"
+  );
+  if (process.platform != 'win32') {
+    // check platform
+    console.log(
+      '                       If you are on linux or mac: Run chmod +x bin/xlink' +
+        reset +
+        FgYellow
+    );
+  } else {
+    console.log(reset + FgYellow);
+  }
+  console.log(
+    "      Additionally run 'npm xlink', so that you can use the xlink command globally" +
+      FgGreen
+  );
+  console.log(
+    '             Great, you have completed all of the steps, to run the app, type:' +
+      FgCyan +
+      bright
+  );
+  console.log(
+    '           -------------------------------> xlink <-------------------------------'
+  );
+  console.log(reset);
+
+  // END INSTRUCTION | START INSTALL SCRIPT
+  if (process.argv.includes('-i')) {
+    askAndInstallDependencies();
+  }
+  // END INSTALL SCRIPT | EXIT APP
+  process.exit(403);
+}
+
+// run app
+require('../modules/main');
+// Do more stuff if needed :>

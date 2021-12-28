@@ -1,0 +1,38 @@
+{
+  "name": "xlink",
+  "version": "0.0.2",
+  "description": "a bridge between xlink compatible accesories",
+  "main": "index.js",
+  "bin": {
+    "@InfoX1337/xlink": "bin/xlink",
+    "xlink": "bin/xlink"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xStudios-one/xlink.git"
+  },
+  "keywords": [
+    "xlink"
+  ],
+  "author": "InfoX1337",
+  "license": "CC BY 4.0 ",
+  "bugs": {
+    "url": "https://github.com/xStudios-one/xlink/issues"
+  },
+  "homepage": "https://github.com/xStudios-one/xlink#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "chalk": "^5.0.0",
+    "child_process": "^1.0.2",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^10.0.0",
+    "path": "^0.12.7",
+    "progress": "^2.0.3",
+    "prompts": "^2.4.2",
+    "signale": "^1.4.0",
+    "yargs": "^17.3.1"
+  }
+}
